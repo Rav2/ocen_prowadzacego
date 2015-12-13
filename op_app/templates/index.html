@@ -1,20 +1,15 @@
 {% extends "base.html" %}
 
-{% block additional-styles %}
-<link href="{{ STATIC_URL }}css/signin.css" rel="stylesheet">
-{% endblock %}
-
-{% block body %}
-
+{% block content %}
 <div class="container">
-
-  <form class="form-signin" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Logowanie!
-    </button>
-  </form>
-
+<!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Imie Nazwisko</h1>
+        <p>To jest opis prowadzącego. To wszystko musi byc automatycznie!</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Ocen!&raquo;</a>
+        </p>
+      </div>
 </div>
 {% endblock %}
+

@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<form action="/login/" method="post">
+{% extends "base.html" %}
+{% block content %}
+<!--<form action="/login/" method="post">
+    <div class="input-group">
+        {% csrf_token %}
+        {{ form }}
+
+    <input type="submit" class="btn btn-default" value="Submit" />
+    </div>
+</form> !-->
+
+<!-- Trzeba zainstalowac paczke django-widget-tweaks przez pip install !-->
+{% load widget_tweaks %}
+<form>
+    <div class="input-group input-group-lg">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+
+    {{ form.username|add_class:"form-control " }}
+    {{ form.username.errors }}
+
+    {{ form.password|add_class:"form-control" }}
+    {{ form.password.errors }}
+        <input type="submit" class="btn btn-default" value="Submit" />
+    </div>
 </form>
-</body>
-</html>
+
+{% endblock %}
