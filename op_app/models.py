@@ -7,10 +7,10 @@ from django.contrib.auth.models import User
 class LecturerProfile(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
-    info = models.CharField(max_length=2000)
+    info = models.CharField(max_length=2000, blank=True)
     user_id = models.ForeignKey(User, null=False)
-    work_places = models.ManyToManyField("WorkPlace", db_table="LecturerWorkPlace")
-    tags = models.ManyToManyField("Tags", db_table="LecturerTags")
+    work_places = models.ManyToManyField("WorkPlace", db_table="LecturerWorkPlace", blank=True)
+    tags = models.ManyToManyField("Tags", db_table="LecturerTags", blank=True)
 
     class Meta:
         db_table = 'LecturerProfile'

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if profiles %}
-  {% for profile in profiles %}
+
+{% if profile %}
+
     <div class="container">
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -12,15 +13,18 @@
             {{ profile.info }}
           {% endif %}
           </p>
-          <p>
-          <a class="btn btn-lg btn-primary" href="{% url "rate" pk=profile.pk %}" role="button">Ocen!&raquo;</a>
-        </p>
+
       </div>
 </div>
-  {% endfor %}
+<div>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="content">
+    <input type="submit" class="btn btn-default" value="Dodaj" />
+</form>
+</div>
 {% else %}
   <li>No lecturers!!!</li>
 {% endif %}
 
 {% endblock %}
-
