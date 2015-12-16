@@ -33,10 +33,11 @@ class Tags(models.Model):
 
 class Comment(models.Model):
     text = models.CharField(max_length=200)
-    wisdom = models.IntegerField()
+    knowledge = models.IntegerField()
     teaching = models.IntegerField()
     friendliness = models.IntegerField()
-    profile_id = models.ForeignKey("LecturerProfile", null=False)
+    #profile is an object, not an integer!
+    profile = models.ForeignKey("LecturerProfile", null=False)
 
     class Meta:
         db_table = 'Comment'

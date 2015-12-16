@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+
+{% block additional-styles %}
+
+<link rel="stylesheet" href="styles/rate.css">
+
+{% endblock %}
 {% block content %}
 
 {% if profile %}
@@ -7,24 +13,119 @@
     <div class="container">
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
+          <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
         <h1>{{profile.name}} {{ profile.surname }}</h1>
           <p>
           {% if profile.info %}
             {{ profile.info }}
           {% endif %}
           </p>
-
       </div>
 </div>
-<div>
+
+<div class="container">
 <form method="POST">
     {% csrf_token %}
+    <div class="row">
     <input type="text" name="content">
     <input type="submit" class="btn btn-default" value="Dodaj" />
+    </div>
+    <div class="row">
+    <div class="star-rating" id="teaching_rating">
+      <span class="fa fa-star-o" data-rating="1"></span>
+      <span class="fa fa-star-o" data-rating="2"></span>
+      <span class="fa fa-star-o" data-rating="3"></span>
+      <span class="fa fa-star-o" data-rating="4"></span>
+      <span class="fa fa-star-o" data-rating="5"></span>
+      <input type="hidden" name="teaching_val" class="rating-value" value="3">
+    </div>
+    <div class="star-rating" id="knowledge_rating">
+      <span class="fa fa-star-o" data-rating="1"></span>
+      <span class="fa fa-star-o" data-rating="2"></span>
+      <span class="fa fa-star-o" data-rating="3"></span>
+      <span class="fa fa-star-o" data-rating="4"></span>
+      <span class="fa fa-star-o" data-rating="5"></span>
+      <input type="hidden" name="knowledge_val" class="rating-value" value="3">
+    </div>
+    <div class="star-rating" id="friendliness_rating">
+      <span class="fa fa-star-o" data-rating="1"></span>
+      <span class="fa fa-star-o" data-rating="2"></span>
+      <span class="fa fa-star-o" data-rating="3"></span>
+      <span class="fa fa-star-o" data-rating="4"></span>
+      <span class="fa fa-star-o" data-rating="5"></span>
+      <input type="hidden" name="friendliness_val" class="rating-value" value="3">
+    </div>
+</div>
 </form>
 </div>
+
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+<h3>User Comment Example</h3>
+</div><!-- /col-sm-12 -->
+</div><!-- /row -->
+
+{% if comments%}
+{% for comment in comments%}
+
+<div class="row">
+<div class="col-sm-1">
+<div class="thumbnail">
+<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-5">
+<div class="panel panel-default">
+<div class="panel-heading">
+<strong>myusername</strong> <span class="text-muted">
+
+
+   <ul>
+    <li>Nauczanie: {{comment.teaching}}</li>
+    <li>Wiedza: {{comment.knowledge}}</li>
+    <li>Stosunek do studenta: {{comment.friendliness}}</li>
+    </ul>
+</span>
+</div>
+<div class="panel-body">
+{{comment.text}}
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div><!-- /col-sm-5 -->
+</div>
+    </div>
+{% endfor %}
+{%else%}
+<li>Bądź pierwszy i oceń {{profile.name }} {{profile.surname}}</li>
+{%endif%}
+
 {% else %}
-  <li>No lecturers!!!</li>
+  <p>No lecturers!!!</p>
 {% endif %}
 
+{% endblock %}
+ {% block page-script-bottom %}
+
+<script type="text/javascript">
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+</script>
 {% endblock %}
