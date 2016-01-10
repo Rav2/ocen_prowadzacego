@@ -9,4 +9,7 @@ urlpatterns = [
     url(r'^rate/(?P<pk>\d+)/?', views.rate, name="rate"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+    url(r'^search/', views.search),
+    url(r'^add/', views.addLecturer),
+    url(r'^register/', views.registration)
 ]

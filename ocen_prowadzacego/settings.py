@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'op_app',
     'widget_tweaks',
+    #'star_ratings'
 
 )
 
@@ -105,3 +106,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/index'
+LOGIN_URL = '/login'

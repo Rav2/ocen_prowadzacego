@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form action="/add/" method="post"  class="form-horizontal">
+
+        {% csrf_token %}
+        <div class="jumbotron">
+            <h3>Dane osobowe:</h3>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.name.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.name }}
+                </div>
+            </div>
+            {% if form.name.errors %}
+            {% for error in form.name.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.surname.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.surname }}
+                </div>
+            </div>
+            {% if form.surname.errors %}
+            {% for error in form.surname.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.info.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.info }}
+                </div>
+            </div>
+            {% if form.info.errors %}
+            {% for error in form.info.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+            <h3>Miejsca pracy:</h3>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    {{ form.workPlaceName1.label_tag }}
+                    {{ form.workPlaceName1 }}
+                    {% if form.workPlaceName1.errors %}
+                    {% for error in form.workPlaceName1.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-5">
+                    {{ form.workPlaceTown1.label_tag }}
+                    {{ form.workPlaceTown1 }}
+                    {% if form.workPlaceTown1.errors %}
+                    {% for error in form.workPlaceTown1.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    {{ form.workPlaceName2.label_tag }}
+                    {{ form.workPlaceName2 }}
+                    {% if form.workPlaceName2.errors %}
+                    {% for error in form.workPlaceName2.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-5">
+                    {{ form.workPlaceTown2.label_tag }}
+                    {{ form.workPlaceTown2 }}
+                    {% if form.workPlaceTown2.errors %}
+                    {% for error in form.workPlaceTown2.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-5">
+                    {{ form.workPlaceName3.label_tag }}
+                    {{ form.workPlaceName3 }}
+                    {% if form.workPlaceName3.errors %}
+                    {% for error in form.workPlaceName3.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-5">
+                    {{ form.workPlaceTown3.label_tag }}
+                    {{ form.workPlaceTown3 }}
+                    {% if form.workPlaceTown3.errors %}
+                    {% for error in form.workPlaceTown3.errors %}
+                        <h6 class="text-danger">
+                        {{ error }}
+                        </h6>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <h3>Dziedziny naukowe:</h3>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.tag1.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.tag1 }}
+                </div>
+            </div>
+            {% if form.tag1.errors %}
+            {% for error in form.tag1.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.tag2.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.tag2 }}
+                </div>
+            </div>
+            {% if form.tag2.errors %}
+            {% for error in form.tag2.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form.tag3.label_tag }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.tag3 }}
+                </div>
+            </div>
+            {% if form.tag3.errors %}
+            {% for error in form.tag3.errors %}
+            <h6 class="text-danger">
+            {{ error }}
+            </h6>
+            {% endfor %}
+            {% endif %}
+
+
+        <button class="btn btn-primary btn-lg" type="submit">Dodaj</button>
+        </div>
+
+</form>
+</div>
+
+{% endblock %}

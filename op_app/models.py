@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class LecturerProfile(models.Model):
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-    info = models.CharField(max_length=2000, blank=True)
+    name = models.CharField(max_length=100, verbose_name='Imię:')
+    surname = models.CharField(max_length=100, verbose_name='Nazwisko:')
+    info = models.CharField(max_length=2000, blank=True, verbose_name='Dodatkowe informacje:')
     user_id = models.ForeignKey(User, null=False)
     work_places = models.ManyToManyField("WorkPlace", db_table="LecturerWorkPlace", blank=True)
     tags = models.ManyToManyField("Tags", db_table="LecturerTags", blank=True)

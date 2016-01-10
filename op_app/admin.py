@@ -4,6 +4,6 @@ from . import models
 # admina dla modelu LecturerProfile
 
 
-@admin.register(models.LecturerProfile)
+@admin.register(models.LecturerProfile, models.Tags, models.WorkPlace, models.Comment)
 class Admin(admin.ModelAdmin):
     pass

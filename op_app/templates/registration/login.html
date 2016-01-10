@@ -10,22 +10,83 @@
 </form> !-->
 
 <!-- Trzeba zainstalowac paczke django-widget-tweaks przez pip install !-->
-{% load widget_tweaks %}
-<form method="POST">
-    <div class="input-group input-group-lg">
-    {% csrf_token %}
+<!--{% load widget_tweaks %}-->
+<!--<form method="POST">-->
+    <!--<div class="container">-->
+        <!--<div class="jumbotron">-->
+    <!--<div class="input-group input-group-lg">-->
+    <!--{% csrf_token %}-->
 
-        {{ form.non_field_errors }}
+        <!--{{ form.non_field_errors }}-->
 
-    {{ form.username|add_class:"form-control " }}
-    {{ form.username.errors }}
+    <!--{{ form.username|add_class:"form-control " }}-->
+    <!--{{ form.username.errors }}-->
 
-    {{ form.password|add_class:"form-control" }}
-    {{ form.password.errors }}
+    <!--{{ form.password|add_class:"form-control" }}-->
+    <!--{{ form.password.errors }}-->
 
-{#        {{ form }}#}
-        <input type="submit" class="btn btn-default" value="Submit" />
-    </div>
+<!--{#        {{ form }}#}-->
+        <!--<input type="submit" class="btn btn-primary btn-lg" value="Zaloguj się" />-->
+    <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+
+<div class="container">
+    <div class="jumbotron">
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Aby przejść dalej musisz się zalogować</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+    {{ form.non_field_errors }}
+
+<table>
+    <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+    </tr>
+    {% if form.username.errors %}
+    <tr>
+    {% for error in form.username.errors %}
+    <p class="text-warning">
+        <td>{{ error }}</td>
+        </p>
+    {% endfor %}
+    {% endif %}
+    </tr>
+    <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+    </tr>
+    {% if form.password.errors %}
+    <tr>
+    {% for error in form.password.errors %}
+    <p class="text-warning">
+        <td>{{ error }}</td>
+        </p>
+    {% endfor %}
+    {% endif %}
+    </tr>
+</table>
+
+<input type="submit" value="Zaloguj się" />
+<input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+        <p><a href="/register">Nie masz jeszcze konta?</a></p>
+        <p2><a href="{% url 'password_reset' %}">Nie pamiętasz hasła?</a></p2>
+    </div>
+</div>
 
 {% endblock %}

@@ -14,13 +14,23 @@
           {% endif %}
           </p>
           <p>
-          <a class="btn btn-lg btn-primary" href="{% url "rate" pk=profile.pk %}" role="button">Ocen!&raquo;</a>
+          <a class="btn btn-lg btn-primary" href='{% url "rate" pk=profile.pk %}' role="button">Oceń!&raquo;</a>
         </p>
       </div>
 </div>
   {% endfor %}
+  <div class="container">
+    <div class="jumbotron">
+      <h3>Nie znalazłeś prowadzącego? <a href="/add">Utwórz jego profil</a></h3>
+    </div>
+  </div>
 {% else %}
-  <li>No lecturers!!!</li>
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Brak wyników wyszukiwania!</h2>
+      <h3>Nie znalazłeś prowadzącego? <a href="/add">Utwórz jego profil</a></h3>
+    </div>
+  </div>
 {% endif %}
 
 {% endblock %}
