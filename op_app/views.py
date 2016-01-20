@@ -30,12 +30,15 @@ def rate(request, pk):
         comm.teaching = request.POST['teaching_val']
         comm.knowledge = request.POST['knowledge_val']
         comm.friendliness = request.POST['friendliness_val']
+        comm.nickname = request.POST['nick']
+        comm.date = datetime.now()
         comm.save()
+        star_number = [0,1,2,3,4]
         #TODO: make it look likea prof
         profile = LecturerProfile.objects.filter(pk=pk)
         # template = loader.get_template()
         comments = Comment.objects.filter(profile=profile)
-        context = {'profile': profile[0], 'comments':comments}
+        context = {'profile': profile[0], 'comments':comments, 'nickname': comm.nickname, 'date': comm.date, 'star_number': star_number}
         return render(request, 'rate.html', context)
     else:
         return HttpResponse(status=403)

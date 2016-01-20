@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import *
 
 
 # Create your models here.
@@ -37,6 +38,8 @@ class Comment(models.Model):
     teaching = models.IntegerField()
     friendliness = models.IntegerField()
     #profile is an object, not an integer!
+    nickname = models.CharField(max_length=10)
+    date = models.DateTimeField(default=datetime.now, blank=True)
     profile = models.ForeignKey("LecturerProfile", null=False)
 
     class Meta:
