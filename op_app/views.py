@@ -65,7 +65,8 @@ def search(request):
                 profiles = LecturerProfile.objects.filter(work_places__town__iexact=request.POST['WorkPlace']).distinct()
         template = loader.get_template('index.html') # Ładuje szablon
         context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
-        return HttpResponse(template.render(context))
+        return render(request, 'index.html', context)
+        #return HttpResponse(template.render(context))
     else:
         return HttpResponse(status=403)
 
