@@ -12,8 +12,8 @@ def index(request):
         profiles = LecturerProfile.objects.all() # lisa prowadzacych
         template = loader.get_template('index.html') # Ładuje szablon
         context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
-
-        return HttpResponse(template.render(context))
+        return render(request, 'index.html', context)
+        #return HttpResponse(template.render(context))
 
 
 def rate(request, pk):
