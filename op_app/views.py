@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import CommentStars, LecturerForm, RegistrationForm
+from .forms import LecturerForm, RegistrationForm
 # Create your views here.
 
 
@@ -13,16 +13,18 @@ def index(request):
         template = loader.get_template('index.html') # Ładuje szablon
         context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
         return render(request, 'index.html', context)
-        #return HttpResponse(template.render(context))
 
 
 def rate(request, pk):
     if request.method == 'GET':
         profile = LecturerProfile.objects.filter(pk=pk)
-        comments = Comment.objects.filter(profile=profile)
+        if(profile):
+            comments = Comment.objects.filter(profile=profile)
 
-        context = {'profile': profile[0], 'comments':comments}
-        return render(request, 'rate.html', context)
+            context = {'profile': profile[0], 'comments':comments}
+            return render(request, 'rate.html', context)
+        else:
+            return HttpResponse(status=404, content='404 NOT FOUND!')
     elif request.method == 'POST':
         comm = Comment()
         comm.text = request.POST['content']
@@ -122,7 +124,7 @@ def registration(request):
                                             email=request.POST['email'], first_name=request.POST['first_name'],
                                             last_name=request.POST['last_name'])
             user.save()
-            return redirect('/index')
+            return redirect('/search')
     elif request.method == 'GET':
         form = RegistrationForm()
     else:

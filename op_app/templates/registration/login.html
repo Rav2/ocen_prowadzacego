@@ -35,13 +35,12 @@
 <div class="container">
     <div class="jumbotron">
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Podano błędny login lub hasło. Spróbuj ponownie.</p>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <p>Nie masz uprawnień do przejścia na tą stronę. Użyj innego konta z odpowiednimi uprawnieniami.</p>
     {% else %}
     <p>Aby przejść dalej musisz się zalogować</p>
     {% endif %}
@@ -80,7 +79,7 @@
     </tr>
 </table>
 
-<input type="submit" value="Zaloguj się" />
+<input class="btn btn-primary" type="submit" value="Zaloguj się" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 

@@ -105,5 +105,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/index'
-LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/search/'
+LOGIN_URL = '/login/'
