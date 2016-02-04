@@ -38,8 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'op_app',
-    'widget_tweaks',
-    #'star_ratings'
+    'widget_tweaks'
+
 
 )
 
