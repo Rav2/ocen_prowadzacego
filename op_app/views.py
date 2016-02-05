@@ -2,17 +2,18 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import CommentStars, LecturerForm, RegistrationForm
 from .forms import LecturerForm, RegistrationForm
 # Create your views here.
 
 
-def index(request):
-    if request.method == 'GET':
-        # return render(request, 'index.html')
-        profiles = LecturerProfile.objects.all() # lisa prowadzacych
-        template = loader.get_template('index.html') # Ładuje szablon
-        context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
-        return render(request, 'index.html', context)
+
+# def index(request):
+#     if request.method == 'GET':
+#         # return render(request, 'index.html')
+#         profiles = LecturerProfile.objects.all() # lisa prowadzacych
+#         template = loader.get_template('index.html') # Ładuje szablon
+#         context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
 
 
 def rate(request, pk):
@@ -20,33 +21,43 @@ def rate(request, pk):
         profile = LecturerProfile.objects.filter(pk=pk)
         if(profile):
             comments = Comment.objects.filter(profile=profile)
-
             context = {'profile': profile[0], 'comments':comments}
             return render(request, 'rate.html', context)
         else:
-            return HttpResponse(status=404, content='404 NOT FOUND!')
+            return HttpResponse(status=404, content="<p>404 PAGE NOT FOUND!</p> <a href='/index'>Main page</a>")
+        if len(profile) > 0:
+            comments = Comment.objects.filter(profile=profile)
+            context = {'profile': profile[0], 'comments': comments}
+            return render(request, 'rate.html', context)
+        else:
+            return HttpResponse(status=404)
     elif request.method == 'POST':
         comm = Comment()
-        comm.text = request.POST['content']
+        comment_content = request.POST['content']
+        if len(comment_content) > 2000:
+            comment_content = comment_content[0:1999]
+
+        comm.text = comment_content
         comm.profile = LecturerProfile.objects.get(pk=pk)
         comm.teaching = request.POST['teaching_val']
         comm.knowledge = request.POST['knowledge_val']
         comm.friendliness = request.POST['friendliness_val']
-        comm.nickname = request.POST['nick']
+        comment_nick = request.POST['nick']
+        if len(comment_nick) > 20:
+            comment_nick = comment_nick[0:19]
+        comm.nickname = comment_nick
         comm.date = datetime.now()
         comm.save()
-        star_number = [0,1,2,3,4]
-        #TODO: make it look likea prof
         profile = LecturerProfile.objects.filter(pk=pk)
         # template = loader.get_template()
-        comments = Comment.objects.filter(profile=profile)
-        context = {'profile': profile[0], 'comments':comments, 'nickname': comm.nickname, 'date': comm.date, 'star_number': star_number}
+        comments = Comment.objects.filter(profile=profile).order_by('-date')
+        context = {'profile': profile[0], 'comments': comments, 'nickname': comm.nickname, 'date': comm.date,}
         return render(request, 'rate.html', context)
     else:
         return HttpResponse(status=403)
 
 
-def search(request):
+def index(request):
     if request.method == 'GET':
         return render(request, 'search.html')
     elif request.method == 'POST':
@@ -124,7 +135,7 @@ def registration(request):
                                             email=request.POST['email'], first_name=request.POST['first_name'],
                                             last_name=request.POST['last_name'])
             user.save()
-            return redirect('/search')
+            return redirect('/index')
     elif request.method == 'GET':
         form = RegistrationForm()
     else:

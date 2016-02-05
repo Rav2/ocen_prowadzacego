@@ -1,0 +1,77 @@
+
+.single-comment{
+color:#f7f7f7;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size:12px;
+}
+
+.label{
+font:inherit;
+color:inherit;
+font-size:inherit;
+}
+
+.rating-block{
+float:left;
+}
+
+.rating-block.k{
+margin-left: 2em;}
+
+.rating-block.f{
+margin-left: 2em;}
+
+
+
+.rating.label{
+font-weight:bold;
+margin-left:0px;
+padding-left:0em;}
+
+.star-rating{
+margin-left:0em;}
+
+.single-comment{
+font:inherit;
+font-size:14px;
+color:inherit;
+margin-right: 0;
+margin-left:10px;
+}
+
+
+.col-sm-5{
+width:50% !important;
+max-height:10% !important;
+}
+.date-container{
+font-size:10px;
+padding-left:10px;
+float:right;
+font:inherit;
+}
+
+#nick{
+max-width:25%}
+
+#content{
+min-height:10em;
+min-width:100%;
+max-width:100%;
+height:10em;
+max-height:10em;}
+
+.comment-text{
+overflow: auto;
+max-width:inherit;}
+
+#submit_btn{
+font-size:18px;
+width:100px;
+height:50px;
+float:right;
+}
+
+.jumbotron{
+padding-top:35px;
+padding-bottom:35px;}

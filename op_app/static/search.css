@@ -1,0 +1,18 @@
+.extra-info{
+position: relative;
+top:-250px;
+width:50%;
+float:right;
+font-size:12px;
+}
+
+#prof_pic{
+padding-left:12px;}
+
+
+.basic-info{
+width:50% !important;}
+
+.jumbotron{
+padding-top:60px;
+padding-bottom:38px;}

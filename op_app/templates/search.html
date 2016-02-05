@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
+{% block additional-styles %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'search.css' %}">
+
+{% endblock %}
 {% block content %}
 <div class="container">
     <form method="POST" class="form-inline">
         {% csrf_token %}
           <div class="jumbotron">
+              <div class="basic-info">
               <h2>Szukaj prowadzącego</h2>
               <p>
                   <input class="form-control" name="Surname" type="text" placeholder="Nazwisko lub dziedzina" maxlength="40" size="40">
@@ -13,9 +19,15 @@
                   <input class="form-control" name="WorkPlace" type="text" placeholder="Uczelnia lub miejscowość" maxlength="40" size="40">
 
               </p>
+
                 <button class="btn btn-primary btn-lg" type="submit">Szukaj</button>
+              </div>
+              <div class="container extra-info">
+                  <img id="prof_pic" src="{% static 'profesor.jpeg' %}" alt="Image of a professor"/>
+                  </div>
           </div>
     </form>
 </div>
+
 
 {% endblock %}

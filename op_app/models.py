@@ -33,12 +33,12 @@ class Tags(models.Model):
 
 
 class Comment(models.Model):
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=2000)
     knowledge = models.IntegerField()
     teaching = models.IntegerField()
     friendliness = models.IntegerField()
     #profile is an object, not an integer!
-    nickname = models.CharField(max_length=10)
+    nickname = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now, blank=True)
     profile = models.ForeignKey("LecturerProfile", null=False)
 

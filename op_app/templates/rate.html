@@ -2,8 +2,8 @@
 
 
 {% block additional-styles %}
-
-<link rel="stylesheet" href="styles/rate.css">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'rate.css' %}">
 
 {% endblock %}
 {% block content %}
@@ -13,6 +13,7 @@
     <div class="container">
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
+          <div class="lecturer_info_1">
           <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
         <h1>{{profile.name}} {{ profile.surname }}</h1>
           <p>
@@ -20,7 +21,12 @@
             {{ profile.info }}
           {% endif %}
           </p>
+              </div>
+          <div class="lecturer_info_1">
+
+              </div>
       </div>
+
 </div>
 
 <div class="container">
@@ -29,45 +35,52 @@
     {% csrf_token %}
     <div class="row">
         <p>
-     <label for="nick">Pseudonim:</label>
-    <input class="form-control" type="text" name="nick" id=name="nick" size="60">
+     <label id="nick-label" for="nick">Pseudonim:</label>
+    <input class="form-control" type="text" name="nick" id="nick" size="60">
        </p>
         <p>
     <label for="content">Treść komentarza:</label>
-    <textarea class="form-control" type="text" name="content" id=name="content" rows="3"></textarea>
+    <textarea class="form-control" type="text" name="content" id="content" rows="3"></textarea>
     </p>
-        <p>
-        <input type="submit" class="btn btn-primary" value="Dodaj" />
-    </p>
+
     </div>
     <div class="row">
-        <label for="teaching_rating">Nauczanie</label>
-    <div class="star-rating" id="teaching_rating">
-      <span class="fa fa-star-o t" data-t_rating="1"></span>
-      <span class="fa fa-star-o t" data-t_rating="2"></span>
-      <span class="fa fa-star-o t" data-t_rating="3"></span>
-      <span class="fa fa-star-o t" data-t_rating="4"></span>
-      <span class="fa fa-star-o t" data-t_rating="5"></span>
-      <input type="hidden" name="teaching_val" class="rating-value t" value="3">
-    </div>
-        <label for="knowledge_rating">Wiedza</label>
-    <div class="star-rating" id="knowledge_rating">
-      <span class="fa fa-star-o k" data-k_rating="1"></span>
-      <span class="fa fa-star-o k" data-k_rating="2"></span>
-      <span class="fa fa-star-o k" data-k_rating="3"></span>
-      <span class="fa fa-star-o k" data-k_rating="4"></span>
-      <span class="fa fa-star-o k" data-k_rating="5"></span>
-      <input type="hidden" name="knowledge_val" class="rating-value k" value="3">
-    </div>
-      <label for="friendliness_rating">Nastawienie do studentów</label>
-    <div class="star-rating" id="friendliness_rating">
-      <span class="fa fa-star-o f" data-f_rating="1"></span>
-      <span class="fa fa-star-o f" data-f_rating="2"></span>
-      <span class="fa fa-star-o f" data-f_rating="3"></span>
-      <span class="fa fa-star-o f" data-f_rating="4"></span>
-      <span class="fa fa-star-o f" data-f_rating="5"></span>
-      <input type="hidden" name="friendliness_val" class="rating-value f" value="3">
-    </div>
+        <div class="rating-block t">
+            <label class="rating label t" for="teaching_rating">Nauczanie</label>
+            <div class="star-rating" id="teaching_rating">
+                <span class="fa fa-star-o t" data-t_rating="1"></span>
+              <span class="fa fa-star-o t" data-t_rating="2"></span>
+              <span class="fa fa-star-o t" data-t_rating="3"></span>
+              <span class="fa fa-star-o t" data-t_rating="4"></span>
+              <span class="fa fa-star-o t" data-t_rating="5"></span>
+              <input type="hidden" name="teaching_val" class="rating-value t" value="3">
+            </div>
+        </div>
+        <div class="rating-block k">
+            <label class="rating label k" for="knowledge_rating">Wiedza</label>
+            <div class="star-rating" id="knowledge_rating">
+              <span class="fa fa-star-o k" data-k_rating="1"></span>
+              <span class="fa fa-star-o k" data-k_rating="2"></span>
+              <span class="fa fa-star-o k" data-k_rating="3"></span>
+              <span class="fa fa-star-o k" data-k_rating="4"></span>
+              <span class="fa fa-star-o k" data-k_rating="5"></span>
+              <input type="hidden" name="knowledge_val" class="rating-value k" value="3">
+            </div>
+        </div>
+     <div class="rating-block f">
+          <label class="rating label f" for="friendliness_rating">Nastawienie do studentów</label>
+        <div class="star-rating" id="friendliness_rating">
+          <span class="fa fa-star-o f" data-f_rating="1"></span>
+          <span class="fa fa-star-o f" data-f_rating="2"></span>
+          <span class="fa fa-star-o f" data-f_rating="3"></span>
+          <span class="fa fa-star-o f" data-f_rating="4"></span>
+          <span class="fa fa-star-o f" data-f_rating="5"></span>
+          <input type="hidden" name="friendliness_val" class="rating-value f" value="3">
+        </div>
+     </div>
+         <p>
+        <input type="submit" id="submit_btn" class="btn btn-primary" value="Dodaj" />
+    </p>
 </div>
 </form>
 </div>
@@ -100,7 +113,7 @@
    <ul>
     <li>Nauczanie:
         {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <  comment.teaching %}
+        {% if  forloop.counter0  <=  comment.teaching %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>
@@ -108,14 +121,14 @@
         {% endfor %}
        </li>
     <li>Wiedza:  {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <  comment.knowledge %}
+        {% if  forloop.counter0  <=  comment.knowledge %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>
         {% endif %}
         {% endfor %}</li>
     <li>Stosunek do studentów: {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <  comment.friendliness %}
+        {% if  forloop.counter0  <=  comment.friendliness %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>
@@ -125,7 +138,7 @@
 </span>
 </div>
 <div class="panel-body">
-{{comment.text}}
+<p class="comment-text">{{comment.text}}</p>
 </div><!-- /panel-body -->
 </div><!-- /panel panel-default -->
 </div><!-- /col-sm-5 -->
@@ -191,6 +204,24 @@ $star_rating.on('mouseover', function() {
 
 });
 
+<!--Function below changes flat strings to multiline ones. --!>
+$( document ).ready(function(){
+    $('.comment-text').each(function()
+    {
+        var text = $(this).text();
+        var textArrays = text.match(/.{1,63}/g);
+
+        var output = new Array();
+        var length = 3;
+        for (var i = 0; i < textArrays.length; i += 1) {
+            var element = textArrays[i];
+            output.push(element.concat("\n"));
+        }
+        var newText = output.join("");
+
+        $(this).text(newText);
+        });
+});
 SetRatingStar();
 </script>
 {% endblock %}
