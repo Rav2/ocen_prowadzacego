@@ -16,14 +16,39 @@
           <div class="lecturer_info_1">
           <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
         <h1>{{profile.name}} {{ profile.surname }}</h1>
-          <p>
-          {% if profile.info %}
-            {{ profile.info }}
-          {% endif %}
-          </p>
               </div>
-          <div class="lecturer_info_1">
 
+          <div class="lecturer_info_2">
+
+              <div class="info_block info">
+              <h2 class="info_head">Informacje:</h2>
+      {% if profile.info %}
+              <p class="info_text">
+            {{ profile.info }}
+          </p>
+                  {% else %}
+                  <p class="info_text">Brak informacji</p>
+          </div>
+              {% endif %}
+
+
+              <div class="info_block">
+
+                  <h3 class="info_head">Miejsce pracy:</h3>
+                  {% if work_names %}
+                        <p class="info_text"> {% for name in work_names %}{{name}}, {% endfor %}</p>
+                  {% else %}
+                  <p class="info_text">Brak danych</p>
+                  {% endif %}
+               </div>
+              <div class="info-block">
+                  <h3 class="info_head">Miejscowość:</h3>
+              {% if work_towns %}
+                <p class="info_text">{% for town in work_towns %}{{town}}, {% endfor %}</p>
+                {% else %}
+                 <p class="info_text">Brak danych</p>
+                {% endif %}
+                  </div>
               </div>
       </div>
 
@@ -113,7 +138,7 @@
    <ul>
     <li>Nauczanie:
         {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <=  comment.teaching %}
+        {% if  forloop.counter <=  comment.teaching %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>
@@ -121,14 +146,14 @@
         {% endfor %}
        </li>
     <li>Wiedza:  {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <=  comment.knowledge %}
+        {% if  forloop.counter  <=  comment.knowledge %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>
         {% endif %}
         {% endfor %}</li>
     <li>Stosunek do studentów: {% for i in "xxxxx" %}
-        {% if  forloop.counter0  <=  comment.friendliness %}
+        {% if  forloop.counter <=  comment.friendliness %}
          <span class="fa fa-star f"></span>
         {% else %}
           <span class="fa fa-star-o f"></span>

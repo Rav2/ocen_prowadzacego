@@ -20,7 +20,13 @@ def rate(request, pk):
         profile = LecturerProfile.objects.filter(pk=pk)
         if(profile):
             comments = Comment.objects.filter(profile=profile).order_by('-date')
-            context = {'profile': profile[0], 'comments': comments}
+            work_places = WorkPlace.objects.filter(lecturerprofile__pk=pk).distinct()
+            work_names = list(set([x.name for x in work_places]))
+            work_towns= list(set([x.town for x in work_places]))
+            if len(work_places)>0:
+                context = {'profile': profile[0], 'comments': comments, 'work_names': work_names, 'work_towns': work_towns}
+            else:
+                context = {'profile': profile[0], 'comments': comments, 'work': None}
             return render(request, 'rate.html', context)
         else:
             return HttpResponse(status=404, content="<p>404 PAGE NOT FOUND!</p> <a href='/index'>Main page</a>")
