@@ -7,7 +7,6 @@ from .forms import LecturerForm, RegistrationForm
 # Create your views here.
 
 
-
 # def index(request):
 #     if request.method == 'GET':
 #         # return render(request, 'index.html')
@@ -20,17 +19,11 @@ def rate(request, pk):
     if request.method == 'GET':
         profile = LecturerProfile.objects.filter(pk=pk)
         if(profile):
-            comments = Comment.objects.filter(profile=profile)
-            context = {'profile': profile[0], 'comments':comments}
-            return render(request, 'rate.html', context)
-        else:
-            return HttpResponse(status=404, content="<p>404 PAGE NOT FOUND!</p> <a href='/index'>Main page</a>")
-        if len(profile) > 0:
-            comments = Comment.objects.filter(profile=profile)
+            comments = Comment.objects.filter(profile=profile).order_by('-date')
             context = {'profile': profile[0], 'comments': comments}
             return render(request, 'rate.html', context)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=404, content="<p>404 PAGE NOT FOUND!</p> <a href='/index'>Main page</a>")
     elif request.method == 'POST':
         comm = Comment()
         comment_content = request.POST['content']
@@ -49,7 +42,6 @@ def rate(request, pk):
         comm.date = datetime.now()
         comm.save()
         profile = LecturerProfile.objects.filter(pk=pk)
-        # template = loader.get_template()
         comments = Comment.objects.filter(profile=profile).order_by('-date')
         context = {'profile': profile[0], 'comments': comments, 'nickname': comm.nickname, 'date': comm.date,}
         return render(request, 'rate.html', context)
@@ -76,10 +68,8 @@ def index(request):
             profiles = LecturerProfile.objects.filter(work_places__name__iexact=request.POST['WorkPlace']).distinct()
             if not profiles:
                 profiles = LecturerProfile.objects.filter(work_places__town__iexact=request.POST['WorkPlace']).distinct()
-        template = loader.get_template('index.html') # Ładuje szablon
-        context = {'profiles': profiles} # Definiuje dane z których korzysta szablon
+        context = {'profiles': profiles}
         return render(request, 'index.html', context)
-        #return HttpResponse(template.render(context))
     else:
         return HttpResponse(status=403)
 
@@ -119,7 +109,11 @@ def addLecturer(request):
                             t = Tags.objects.create(name=request.POST['tag'+str(i)])
                             l.tags.add(t)
                 l.save()
-            return redirect('/index')
+                return redirect('/index')
+            else:
+                comments = Comment.objects.filter(profile=l1).order_by('-date')
+                context = {'profile': l1[0], 'comments': comments}
+                return render(request, 'rate.html', context)
     elif request.method == 'GET':
         formular = LecturerForm()
     else:

@@ -137,20 +137,23 @@
     </ul>
 </span>
 </div>
+
 <div class="panel-body">
 <p class="comment-text">{{comment.text}}</p>
 </div><!-- /panel-body -->
 </div><!-- /panel panel-default -->
 </div><!-- /col-sm-5 -->
+
 </div>
-    </div>
+</div>
 {% endfor %}
 {%else%}
 <li>Bądź pierwszy i oceń {{profile.name }} {{profile.surname}}</li>
 {%endif%}
 
 {% else %}
-  <p>No lecturers!!!</p>
+  <p>Brak prowadzących!!!</p>
+    <a href="/add/">Dodaj prowadzącego!</a>
 {% endif %}
 
 {% endblock %}
