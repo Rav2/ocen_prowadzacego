@@ -52,7 +52,9 @@
               </div>
       </div>
 
+</div>
 
+<div class="container">
     <div class="jumbotron">
 <form method="POST">
     {% csrf_token %}
@@ -107,7 +109,7 @@
 </div>
 </form>
 </div>
-</div> <!--container-->
+</div>
 
 <div class="container">
 <div class="row">
@@ -169,7 +171,6 @@
 
 </div>
 </div>
-
 {% endfor %}
 {%else%}
 <li>Bądź pierwszy i oceń {{profile.name }} {{profile.surname}}</li>
@@ -179,7 +180,7 @@
   <p>Brak prowadzących!!!</p>
     <a href="/add/">Dodaj prowadzącego!</a>
 {% endif %}
-</div>
+
 {% endblock %}
  {% block page-script-bottom %}
 
