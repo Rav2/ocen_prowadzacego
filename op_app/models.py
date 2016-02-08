@@ -12,6 +12,9 @@ class LecturerProfile(models.Model):
     user_id = models.ForeignKey(User, null=False)
     work_places = models.ManyToManyField("WorkPlace", db_table="LecturerWorkPlace", blank=True)
     tags = models.ManyToManyField("Tags", db_table="LecturerTags", blank=True)
+    knowledge_av = models.FloatField(default=0)
+    teaching_av = models.FloatField(default=0)
+    friendliness_av = models.FloatField(default=0)
 
     class Meta:
         db_table = 'LecturerProfile'

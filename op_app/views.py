@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import CommentStars, LecturerForm, RegistrationForm
+from django.db.models import F
 from .forms import LecturerForm, RegistrationForm
 # Create your views here.
 
@@ -47,9 +47,25 @@ def rate(request, pk):
         comm.nickname = comment_nick
         comm.date = datetime.now()
         comm.save()
-        profile = LecturerProfile.objects.filter(pk=pk)
+        profile = LecturerProfile.objects.get(pk=pk)
         comments = Comment.objects.filter(profile=profile).order_by('-date')
-        context = {'profile': profile[0], 'comments': comments, 'nickname': comm.nickname, 'date': comm.date,}
+        teach_av = 0.
+        know_av = 0.
+        friend_av = 0.
+        for comment in comments:
+            teach_av += comment.teaching
+            know_av += comment.knowledge
+            friend_av += comment.friendliness
+        profile.teaching_av = round(teach_av/len(comments), 2)
+        profile.knowledge_av = round(know_av/len(comments), 2)
+        profile.friendliness_av = round(friend_av/len(comments), 2)
+        profile.save()
+
+        work_places = WorkPlace.objects.filter(lecturerprofile__pk=pk).distinct()
+        work_names = list(set([x.name for x in work_places]))
+        work_towns= list(set([x.town for x in work_places]))
+
+        context = {'profile': profile, 'comments': comments, 'nickname': comm.nickname, 'date': comm.date, 'work_names': work_names, 'work_towns': work_towns}
         return render(request, 'rate.html', context)
     else:
         return HttpResponse(status=403)
@@ -141,3 +157,25 @@ def registration(request):
     else:
         return HttpResponse(status=403)
     return render(request, 'registration.html', {'form': form})
+
+
+def ranking_top10(request):
+    if request.method == 'GET':
+        lecturer_profiles = LecturerProfile.objects.all().order_by((F('teaching_av')+F('knowledge_av')+F('friendliness_av'))/3).reverse()[:10]
+        context = {'profiles': lecturer_profiles, 'title': "Ranking 10 najlepszych prowadzących według ocen użytkowników"}
+        return render(request, 'ranking.html', context)
+    else:
+        return HttpResponse(status=403)
+
+
+def ranking_university(request):
+    if request.method == 'GET':
+        universities = WorkPlace.objects.all().order_by('name')
+        context = {'universities': universities}
+        return render(request, 'ranking_universities.html', context)
+    elif request.method == 'POST':
+        profiles = LecturerProfile.objects.filter(work_places__name=request.POST['University']).distinct().order_by((F('teaching_av')+F('knowledge_av')+F('friendliness_av'))/3).reverse()
+        context = {'profiles': profiles, 'title': "Ranking prowadzących na uczelni: "+request.POST['University']}
+        return render(request, 'ranking.html', context)
+    else:
+        return HttpResponse(status=403)

@@ -1,0 +1,37 @@
+.lecturer_info_2{
+float:right;
+max-width:60%;
+margin-right: inherit;
+position:relative;
+bottom: 350px;}
+
+.info_head{
+float:left;
+margin-right:0px;
+margin-bottom:
+font-weight:bold;}
+
+.info_text{
+padding-left: 8em;
+padding-top:10px;
+margin-right:0px;
+font-size:10px;
+position:relative;
+top:10px;
+}
+
+.info_block{
+
+
+margin-right:0px;
+margin-bottom: 0px;
+margin-bottom:35px;
+}
+
+.info{
+max-height: 100px;
+margin-bottom:120px;
+margin-top:10px;}
+
+.container{
+padding-left:0px;}

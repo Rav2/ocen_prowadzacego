@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block additional-styles %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'ranking.css' %}">
+
+{% endblock %}
+
+{% block content %}
+{%if title %}
+  <div class="container">
+    <div class="jumbotron">
+<h2 class="text-center">{{ title }}</h2>
+    </div>
+  </div>
+{% endif %}
+{% if profiles %}
+  {% for profile in profiles %}
+    <div class="container">
+<!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+         <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+        <h1>{{profile.name}} {{ profile.surname }}</h1>
+          <p>
+          {% if profile.info %}
+            {{ profile.info }}
+          {% endif %}
+          </p>
+          <p>
+          <a class="btn btn-lg btn-primary" href='{% url "rate" pk=profile.pk %}' role="button">Oceń!&raquo;</a>
+        </p>
+        <div class="lecturer_info_2">
+
+              <div class="info_block info">
+              <h2 class="info_head">Średnie ocen:</h2>
+                  </div>
+                <div class="info_block">
+              <h3 class="info_head">Nauczanie: </h3>
+              <p class="info_text">
+            {{ profile.teaching_av }} / 5.0
+              </p>
+                </div>
+            <div class="info_block">
+               <h3 class="info_head">Wiedza:</h3>
+                <p class="info_text">
+            {{ profile.knowledge_av }} / 5.0
+              </p>
+                </div>
+            <div class="info_block">
+                <h3 class="info_head">Stosunek do studentów:</h3>
+                <p class="info_text">
+            {{ profile.friendliness_av }} / 5.0
+              </p>
+
+          </div>
+      </div>
+</div>
+
+  {% endfor %}
+</div>
+{% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Brak prowadzących!</h2>
+      <h3> <a href="/add">Dodaj prowadzącego</a></h3>
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}

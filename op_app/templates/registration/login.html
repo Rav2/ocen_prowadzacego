@@ -1,36 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<!--<form action="/login/" method="post">
-    <div class="input-group">
-        {% csrf_token %}
-        {{ form }}
 
-    <input type="submit" class="btn btn-default" value="Submit" />
-    </div>
-</form> !-->
-
-<!-- Trzeba zainstalowac paczke django-widget-tweaks przez pip install !-->
-<!--{% load widget_tweaks %}-->
-<!--<form method="POST">-->
-    <!--<div class="container">-->
-        <!--<div class="jumbotron">-->
-    <!--<div class="input-group input-group-lg">-->
-    <!--{% csrf_token %}-->
-
-        <!--{{ form.non_field_errors }}-->
-
-    <!--{{ form.username|add_class:"form-control " }}-->
-    <!--{{ form.username.errors }}-->
-
-    <!--{{ form.password|add_class:"form-control" }}-->
-    <!--{{ form.password.errors }}-->
-
-<!--{#        {{ form }}#}-->
-        <!--<input type="submit" class="btn btn-primary btn-lg" value="Zaloguj się" />-->
-    <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</form>-->
 
 <div class="container">
     <div class="jumbotron">
@@ -80,7 +50,7 @@
 </form>
 
         <p><a href="/register">Nie masz jeszcze konta?</a></p>
-        <p2><a href="{% url 'password_reset' %}">Nie pamiętasz hasła?</a></p2>
+        <!--<p2><a href="{% url 'password_reset' %}">Nie pamiętasz hasła?</a></p2>-->
     </div>
 </div>
 

@@ -10,7 +10,7 @@
 
 {% if profile %}
 
-    <div class="container">
+<div class="container">
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
           <div class="lecturer_info_1">
@@ -52,9 +52,7 @@
               </div>
       </div>
 
-</div>
 
-<div class="container">
     <div class="jumbotron">
 <form method="POST">
     {% csrf_token %}
@@ -109,7 +107,7 @@
 </div>
 </form>
 </div>
-</div>
+</div> <!--container-->
 
 <div class="container">
 <div class="row">
@@ -171,6 +169,7 @@
 
 </div>
 </div>
+
 {% endfor %}
 {%else%}
 <li>Bądź pierwszy i oceń {{profile.name }} {{profile.surname}}</li>
@@ -180,7 +179,7 @@
   <p>Brak prowadzących!!!</p>
     <a href="/add/">Dodaj prowadzącego!</a>
 {% endif %}
-
+</div>
 {% endblock %}
  {% block page-script-bottom %}
 

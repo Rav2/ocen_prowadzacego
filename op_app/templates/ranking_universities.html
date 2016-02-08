@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if universities %}
+
+    <div class="container">
+<!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+          <h2>Wybierz uczelnie:</h2>
+          <form method="POST">
+              {% csrf_token %}
+        <select class="form-control input-lg" name="University">
+            {% for university in universities %}
+            <option>{{ university.name }}</option>
+            {% endfor %}
+        </select>
+              <button class="btn btn-primary" type="submit">Ranking uczelni</button>
+        </form>
+
+      </div>
+</div>
+
+
+{% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Brak uczelni!</h2>
+
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}

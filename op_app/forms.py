@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class CommentStars(Form):
-     teaching_rate = LikertFormField()
+    teaching_rate = LikertFormField()
 
 
 class LecturerForm(forms.ModelForm):
@@ -22,21 +22,12 @@ class LecturerForm(forms.ModelForm):
 
     class Meta:
         model = LecturerProfile
-        exclude = ['user_id', 'work_places', 'tags']
+        exclude = ['user_id', 'work_places', 'tags', 'knowledge_av', 'teaching_av', 'friendliness_av']
 
 
 class RegistrationForm(forms.ModelForm):
     email = forms.CharField(max_length=100, required=True, label='Adres email')
-    #password2 = forms.CharField(max_length=100, required=True, label='Powtórz hasło')
-    #TODO: make password2 work
-    #def clean(self):
-        #cleaned_data = super(RegistrationForm, self).clean()
-        # if cleaned_data['password'] and cleaned_data['password2']:
-        #     if cleaned_data['password'] != cleaned_data['password2']:
-        #         raise forms.ValidationError("Wpisz poprawne hasło")
 
     class Meta:
         model = User
         exclude = ['groups', 'user_permissions', 'is_staff', 'is_active', 'is_superuser', 'last_login', 'date_joined']
-
-
