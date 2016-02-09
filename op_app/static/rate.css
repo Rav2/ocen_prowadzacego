@@ -74,7 +74,9 @@ float:right;
 
 .jumbotron{
 padding-top:35px;
-padding-bottom:100px;}
+padding-bottom:70px;
+margin-bottom:0px;
+margin-top:0px;}
 
 .lecturer_info_1{
 min-width:20%;
@@ -104,16 +106,22 @@ top:10px;
 
 .info_block{
 
-min-height:4em;
+min-height:10px;
 margin-right:0px;
-margin-bottom: 0px;
-margin-bottom:35px;
+padding-bottom:35px;
+margin-bottom:0px;
 }
 
 .info{
 max-height: 100px;
-margin-bottom:120px;
+padding-bottom:150px;
+margin-bottom:10px;
 margin-top:20px;}
 
 .container{
-padding-left:0px;}
+padding-left:0px;
+
+}
+
+#cont1{
+max-height: 500px;}

@@ -10,7 +10,7 @@
 
 {% if profile %}
 
-<div class="container">
+<div class="container" id="cont1">
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
           <div class="lecturer_info_1">
@@ -22,14 +22,15 @@
 
               <div class="info_block info">
               <h2 class="info_head">Informacje:</h2>
-      {% if profile.info %}
-              <p class="info_text">
-            {{ profile.info }}
-          </p>
+                {% if profile.info %}
+                <p class="info_text">
+                    {{ profile.info }}
+                </p>
                   {% else %}
                   <p class="info_text">Brak informacji</p>
-          </div>
+
               {% endif %}
+                  </div>
 
 
               <div class="info_block">
@@ -180,7 +181,7 @@
   <p>Brak prowadzących!!!</p>
     <a href="/add/">Dodaj prowadzącego!</a>
 {% endif %}
-
+</div>
 {% endblock %}
  {% block page-script-bottom %}
 

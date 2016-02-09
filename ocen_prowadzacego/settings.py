@@ -108,3 +108,4 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/search/'
 LOGIN_URL = '/login/'
+

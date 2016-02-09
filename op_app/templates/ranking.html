@@ -21,11 +21,7 @@
       <div class="jumbotron">
          <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
         <h1>{{profile.name}} {{ profile.surname }}</h1>
-          <p>
-          {% if profile.info %}
-            {{ profile.info }}
-          {% endif %}
-          </p>
+
           <p>
           <a class="btn btn-lg btn-primary" href='{% url "rate" pk=profile.pk %}' role="button">Oceń!&raquo;</a>
         </p>
